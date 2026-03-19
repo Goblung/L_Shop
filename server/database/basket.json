@@ -1,0 +1,27 @@
+[
+  {
+    "userId": "294be23b-f606-4ae5-ad1d-157ef56bc28f",
+    "active": true,
+    "items": [],
+    "updatedAt": "2026-03-19T21:13:13.569Z"
+  },
+  {
+    "userId": "8d24f547-2ef6-48b9-909f-6cb3e145d776",
+    "active": true,
+    "items": [
+      {
+        "productId": "p1",
+        "name": "Молоко 1л",
+        "price": 120,
+        "quantity": 2
+      },
+      {
+        "productId": "p2",
+        "name": "Хлеб цельнозерновой",
+        "price": 75,
+        "quantity": 1
+      }
+    ],
+    "updatedAt": "2026-03-19T21:07:05.824Z"
+  }
+]

@@ -1,0 +1,8 @@
+[
+  { "id": "p1", "name": "Молоко 1л", "price": 120, "category": "milk", "inStock": true },
+  { "id": "p2", "name": "Кефир 1л", "price": 110, "category": "milk", "inStock": true },
+  { "id": "p3", "name": "Хлеб цельнозерновой", "price": 75, "category": "bakery", "inStock": true },
+  { "id": "p4", "name": "Батон нарезной", "price": 60, "category": "bakery", "inStock": true },
+  { "id": "p5", "name": "Яблоки 1кг", "price": 180, "category": "fruits", "inStock": true },
+  { "id": "p6", "name": "Бананы 1кг", "price": 150, "category": "fruits", "inStock": true }
+]

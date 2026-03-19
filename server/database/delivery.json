@@ -1,0 +1,26 @@
+[
+  {
+    "id": "d-1773954108213",
+    "userId": "294be23b-f606-4ae5-ad1d-157ef56bc28f",
+    "address": "ул. Пушкина, д. 10",
+    "status": "active",
+    "createdAt": "2026-03-19T21:01:48.213Z"
+  },
+  {
+    "id": "d-1773954425827",
+    "userId": "8d24f547-2ef6-48b9-909f-6cb3e145d776",
+    "address": "ул. Пушкина, д. 10",
+    "status": "active",
+    "createdAt": "2026-03-19T21:07:05.827Z"
+  },
+  {
+    "id": "d-1773954793567",
+    "userId": "294be23b-f606-4ae5-ad1d-157ef56bc28f",
+    "address": "ул. Тест, 1",
+    "phone": "79990000000",
+    "email": "vlad@example.com",
+    "paymentMethod": "card",
+    "status": "active",
+    "createdAt": "2026-03-19T21:13:13.567Z"
+  }
+]
