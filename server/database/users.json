@@ -1,0 +1,18 @@
+[
+  {
+    "id": "294be23b-f606-4ae5-ad1d-157ef56bc28f",
+    "name": "Vlad",
+    "login": "vlad",
+    "email": "vlad@example.com",
+    "phone": "79990000000",
+    "passwordHash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92"
+  },
+  {
+    "id": "8d24f547-2ef6-48b9-909f-6cb3e145d776",
+    "name": "John",
+    "login": "john",
+    "email": "client@demo.local",
+    "phone": "375333838579",
+    "passwordHash": "948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d"
+  }
+]
