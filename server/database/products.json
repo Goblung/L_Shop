@@ -1,8 +1,66 @@
 [
-  { "id": "p1", "name": "Молоко 1л", "price": 120, "category": "milk", "inStock": true },
-  { "id": "p2", "name": "Кефир 1л", "price": 110, "category": "milk", "inStock": true },
-  { "id": "p3", "name": "Хлеб цельнозерновой", "price": 75, "category": "bakery", "inStock": true },
-  { "id": "p4", "name": "Батон нарезной", "price": 60, "category": "bakery", "inStock": true },
-  { "id": "p5", "name": "Яблоки 1кг", "price": 180, "category": "fruits", "inStock": true },
-  { "id": "p6", "name": "Бананы 1кг", "price": 150, "category": "fruits", "inStock": true }
+  {
+    "id": "p1",
+    "title": "AMD Ryzen 5 5600X (3.7-4.6 ГГц)",
+    "price": 400,
+    "isAvailable": true,
+    "description": "Шестиядерный процессор для игровых и рабочих ПК. Подходит для AM4-сокета.",
+    "categories": ["cpu"],
+    "images": { "preview": "/img/Ryzen55600x.jpg" },
+    "discount": 5
+  },
+  {
+    "id": "p2",
+    "title": "NVIDIA GeForce RTX 4060 8GB",
+    "price": 1150,
+    "isAvailable": true,
+    "description": "Видеокарта на базе NVIDIA Ada Lovelace. Поддержка DLSS для высокой производительности.",
+    "categories": ["gpu"],
+    "images": { "preview": "/img/rtx4060.jpg" },
+    "discount": 10
+  },
+  {
+    "id": "p3",
+    "title": "Материнская плата MSI B550M PRO-VDH WiFi",
+    "price": 300,
+    "isAvailable": true,
+    "description": "Компактная microATX плата с поддержкой PCIe 4.0 и модулем Wi‑Fi.",
+    "categories": ["motherboard"],
+    "images": { "preview": "/img/b550.jpeg" },
+    "discount": 0
+  },
+  {
+    "id": "p4",
+    "title": "Оперативная память Kingston DDR4 16GB (2x8) 3200 МГц",
+    "price": 450,
+    "isAvailable": false,
+    "description": "Набор 16 ГБ для апгрейда. XMP-профили для стабильной работы на 3200 МГц.",
+    "categories": ["ram"],
+    "images": { "preview": "/img/ddr416gb.jpeg" }
+  },
+  {
+    "id": "p5",
+    "title": "Блок питания Corsair CX650 650W 80+ Bronze",
+    "price": 400,
+    "isAvailable": true,
+    "description": "Надежный БП для системы среднего класса. 650 Вт мощности с сертификацией 80+ Bronze.",
+    "categories": ["psu"],
+    "images": { "preview": "/img/BP650.jpg" },
+    "discount": 15,
+    "delivery": {
+      "startTown": { "town": "Москва", "street": "ул. Ленина, 1" },
+      "earlyDate": "2026-04-01T00:00:00.000Z",
+      "price": 250
+    }
+  },
+  {
+    "id": "p6",
+    "title": "Корпус DeepCool MATREXX 40",
+    "price": 150,
+    "isAvailable": false,
+    "description": "Компактный корпус с поддержкой современных комплектующих. Удобная сборка и вентиляция.",
+    "categories": ["case"],
+    "images": { "preview": "/img/korpus.jpeg" },
+    "discount": 0
+  }
 ]

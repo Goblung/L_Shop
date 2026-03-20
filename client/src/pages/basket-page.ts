@@ -19,11 +19,11 @@ export async function basketPage(container: HTMLElement): Promise<void> {
                 ${basket.items
                   .map(
                     (item) =>
-                      `<li><span data-title="basket">${item.name}</span> — <span data-price="basket">${item.price} ₽</span> x ${item.quantity}</li>`
+                      `<li><span data-title="basket">${item.name}</span> — <span data-price="basket">${item.price} BYN</span> x ${item.quantity}</li>`
                   )
                   .join("")}
               </ul>
-              <p><strong>Итого: ${total} ₽</strong></p>
+              <p><strong>Итого: ${total} BYN</strong></p>
             `
           }
         </section>
