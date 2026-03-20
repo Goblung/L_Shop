@@ -12,29 +12,44 @@ export async function homePage(container: HTMLElement): Promise<void> {
       <section class="catalog-page" id="catalog-root">
         <h2 class="catalog-title">Каталог компьютерных запчастей</h2>
 
-        <div class="filters-panel" id="filters-panel">
-          <input
-            id="catalog-search"
-            type="text"
-            placeholder="Поиск по названию или описанию (CPU, GPU, RAM, SSD...)"
-            value=""
-          />
-
-          <select id="catalog-sort">
-            <option value="asc">Цена: по возрастанию</option>
-            <option value="desc">Цена: по убыванию</option>
-          </select>
-
-          <div class="category-filters">
-            <h4>Типы запчастей</h4>
-            <div id="catalog-categories" class="category-options"></div>
+        <aside class="filters-panel" id="filters-panel" aria-label="Фильтры каталога">
+          <div class="filters-panel-head">
+            <h3 class="filters-heading">Фильтры</h3>
+            <p class="filters-hint">Уточните каталог по названию, категории и наличию</p>
           </div>
 
-          <label class="availability-filter">
-            <input id="catalog-available" type="checkbox" />
-            Только в наличии
+          <div class="filters-row">
+            <div class="filter-field filter-field-grow">
+              <label class="filter-label" for="catalog-search">Поиск</label>
+              <input
+                id="catalog-search"
+                class="filter-input"
+                type="search"
+                autocomplete="off"
+                placeholder="Например: Ryzen, RTX, DDR4, SSD…"
+                value=""
+              />
+            </div>
+            <div class="filter-field">
+              <label class="filter-label" for="catalog-sort">Сортировка</label>
+              <select id="catalog-sort" class="filter-select">
+                <option value="asc">Цена: сначала дешевле</option>
+                <option value="desc">Цена: сначала дороже</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="filter-field filter-field-categories">
+            <span class="filter-label">Категории</span>
+            <div id="catalog-categories" class="category-chips" role="group" aria-label="Типы запчастей"></div>
+          </div>
+
+          <label class="filter-toggle">
+            <input id="catalog-available" class="filter-toggle-input" type="checkbox" />
+            <span class="filter-toggle-ui" aria-hidden="true"></span>
+            <span class="filter-toggle-text">Только товары в наличии</span>
           </label>
-        </div>
+        </aside>
 
         <div class="products-grid" id="products-grid">
           <p class="muted">Загрузка товаров...</p>
@@ -124,9 +139,11 @@ export async function homePage(container: HTMLElement): Promise<void> {
       .map((cat) => {
         const checked = selectedCategories.includes(cat);
         return `
-          <label class="category-option">
-            <input type="checkbox" data-category="${cat}" ${checked ? "checked" : ""} />
-            ${formatCategory(cat)}
+          <label class="category-chip">
+            <input type="checkbox" class="category-chip-input" data-category="${cat}" ${
+              checked ? "checked" : ""
+            } />
+            <span class="category-chip-text">${formatCategory(cat)}</span>
           </label>
         `;
       })

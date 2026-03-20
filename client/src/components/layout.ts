@@ -34,6 +34,14 @@ export function renderLayout(content: string): string {
         <div class="brand">Shop</div>
         <nav class="menu">
           <a href="/" data-link>Главная</a>
+          ${
+            state.user
+              ? `
+            <a href="/basket" data-link class="nav-link-cart">Корзина</a>
+            <a href="/delivery" data-link>Доставка</a>
+          `
+              : ""
+          }
         </nav>
       </div>
       <div class="topbar-right">
