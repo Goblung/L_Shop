@@ -20,11 +20,11 @@ export async function deliveryPage(container: HTMLElement, message = ""): Promis
                 ${basket.items
                   .map(
                     (item) =>
-                      `<li><span data-title="basket">${item.name}</span> — <span data-price="basket">${item.price} ₽</span> x ${item.quantity}</li>`
+                      `<li><span data-title="basket">${item.name}</span> — <span data-price="basket">${item.price} BYN</span> x ${item.quantity}</li>`
                   )
                   .join("")}
               </ul>
-              <p><strong>Итого: ${total} ₽</strong></p>
+              <p><strong>Итого: ${total} BYN</strong></p>
               <form id="delivery-form" data-delivery="main">
                 <input name="address" placeholder="Адрес доставки" data-delivery="address" required />
                 <input name="phone" placeholder="Телефон" data-delivery="phone" required />

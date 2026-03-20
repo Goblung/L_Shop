@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
 import router from "./src/router/router";
 
 const app = express();
@@ -13,6 +14,10 @@ app.use(
   })
 );
 app.use(express.json());
+
+// Статика для картинок товаров.
+// URL вида `/img/<filename>` будут раздаваться из `server/database/img`.
+app.use("/img", express.static(path.join(__dirname, "database", "img")));
 
 app.use("/api", router);
 

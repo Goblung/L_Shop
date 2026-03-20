@@ -80,10 +80,7 @@ export class BasketService {
     return {
       userId,
       active: true,
-      items: [
-        { productId: "p1", name: "Молоко 1л", price: 120, quantity: 2 },
-        { productId: "p2", name: "Хлеб цельнозерновой", price: 75, quantity: 1 }
-      ],
+      items: [],
       updatedAt: new Date().toISOString()
     };
   }

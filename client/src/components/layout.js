@@ -1,6 +1,31 @@
+import { api } from "../api";
 import { bindRouterLinks, navigate } from "../router";
 import { state } from "../state";
 let userMenuOutsideClickHandler = null;
+let basketCountSyncInstalled = false;
+async function syncBasketCount() {
+    if (!state.user)
+        return;
+    const basketBtn = document.getElementById("user-menu-basket");
+    if (!basketBtn)
+        return;
+    try {
+        const basket = await api.basket();
+        const count = basket.items.reduce((sum, item) => sum + item.quantity, 0);
+        basketBtn.textContent = `Корзина (${count})`;
+    }
+    catch {
+        // If basket endpoint fails - leave default text
+    }
+}
+function ensureBasketCountSync() {
+    if (basketCountSyncInstalled)
+        return;
+    basketCountSyncInstalled = true;
+    window.addEventListener("basket:updated", () => {
+        void syncBasketCount();
+    });
+}
 export function renderLayout(content) {
     return `
     <header class="topbar">
@@ -32,6 +57,8 @@ export function mountLayout(container, content) {
     container.innerHTML = renderLayout(content);
     bindRouterLinks();
     bindAuthControls();
+    ensureBasketCountSync();
+    void syncBasketCount();
 }
 function bindAuthControls() {
     const authButton = document.getElementById("auth-button");
