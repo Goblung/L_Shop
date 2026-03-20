@@ -1,6 +1,8 @@
 import type { ApiError, Basket, Delivery, User } from "../types";
+import type { Product } from "../types/product";
 
 const API_BASE = "http://localhost:4000/api";
+const IMAGES_BASE = API_BASE.replace(/\/api\/?$/, "");
 
 export interface RegisterPayload {
   name: string;
@@ -60,11 +62,42 @@ export const api = {
   me: () => request<User>("/auth/me"),
   logout: () => request<{ message: string }>("/auth/logout", { method: "POST" }),
   basket: () => request<Basket>("/basket/active"),
-  addToBasket: (productId: string) =>
+  addToBasket: (productId: string, quantity: number) =>
     request<Basket>("/basket/items", {
       method: "POST",
-      body: JSON.stringify({ productId, quantity: 1 })
+      body: JSON.stringify({ productId, quantity })
     }),
+  products: async (): Promise<Product[]> => {
+    const rawProducts = await request<unknown[]>("/products");
+    return rawProducts.map((raw) => {
+      const p = raw as any;
+      const preview =
+        typeof p.images?.preview === "string" ? (p.images.preview as string) : undefined;
+
+      const normalizedImages =
+        p.images && typeof p.images === "object"
+          ? {
+              ...p.images,
+              preview:
+                preview && preview.startsWith("/img/")
+                  ? `${IMAGES_BASE}${preview}`
+                  : preview ?? p.images.preview
+            }
+          : p.images;
+
+      return {
+        ...p,
+        id: p.id as number | string,
+        images: normalizedImages,
+        delivery: p.delivery
+          ? {
+              ...p.delivery,
+              earlyDate: new Date(p.delivery.earlyDate)
+            }
+          : undefined
+      } as Product;
+    });
+  },
   deliveries: () => request<Delivery[]>("/delivery/active"),
   createDelivery: (payload: DeliveryPayload) =>
     request<Delivery>("/delivery", {

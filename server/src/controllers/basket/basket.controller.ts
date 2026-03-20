@@ -34,10 +34,14 @@ export class BasketController {
       return;
     }
 
+    const finalPrice = product.discount
+      ? product.price * (1 - product.discount / 100)
+      : product.price;
+
     const basket = await basketService.addItem(req.userId, {
-      productId: product.id,
-      name: product.name,
-      price: product.price,
+      productId: String(product.id),
+      name: product.title,
+      price: finalPrice,
       quantity
     });
     res.status(201).json(basket);

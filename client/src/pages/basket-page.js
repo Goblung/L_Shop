@@ -13,10 +13,10 @@ export async function basketPage(container) {
             : `
               <ul class="basket-list">
                 ${basket.items
-                .map((item) => `<li><span data-title="basket">${item.name}</span> — <span data-price="basket">${item.price} ₽</span> x ${item.quantity}</li>`)
+                .map((item) => `<li><span data-title="basket">${item.name}</span> — <span data-price="basket">${item.price} BYN</span> x ${item.quantity}</li>`)
                 .join("")}
               </ul>
-              <p><strong>Итого: ${total} ₽</strong></p>
+              <p><strong>Итого: ${total} BYN</strong></p>
             `}
         </section>
       `);
