@@ -1,4 +1,4 @@
-import type { ApiError, Basket, Delivery, Product, User } from "../types";
+import type { ApiError, Basket, Delivery, User } from "../types";
 
 const API_BASE = "http://localhost:4000/api";
 
@@ -59,10 +59,6 @@ export const api = {
     }),
   me: () => request<User>("/auth/me"),
   logout: () => request<{ message: string }>("/auth/logout", { method: "POST" }),
-  products: (category: string) =>
-    request<Product[]>(
-      `/products${category === "all" ? "" : `?category=${encodeURIComponent(category)}`}`
-    ),
   basket: () => request<Basket>("/basket/active"),
   addToBasket: (productId: string) =>
     request<Basket>("/basket/items", {

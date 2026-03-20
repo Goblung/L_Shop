@@ -24,20 +24,12 @@ export async function basketPage(container: HTMLElement): Promise<void> {
                   .join("")}
               </ul>
               <p><strong>Итого: ${total} ₽</strong></p>
-              <button id="go-delivery">Открыть доставку</button>
             `
           }
         </section>
       `
     );
-
-    const deliveryBtn = document.getElementById("go-delivery");
-    if (deliveryBtn instanceof HTMLButtonElement) {
-      deliveryBtn.addEventListener("click", () => {
-        void navigate("/delivery");
-      });
-    }
   } catch {
-    await navigate("/register");
+    await navigate("/auth");
   }
 }

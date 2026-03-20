@@ -1,4 +1,4 @@
-import { api, type LoginPayload, type RegisterPayload } from "../api";
+import { api, type RegisterPayload } from "../api";
 import { mountLayout } from "../components/layout";
 import { navigate } from "../router";
 import { state } from "../state";
@@ -7,7 +7,7 @@ export function registerPage(container: HTMLElement, message?: string): void {
   mountLayout(
     container,
     `
-      <section class="auth-grid">
+      <section class="auth-page">
         <article class="card">
           <h2>Регистрация</h2>
           ${message ? `<p class="error">${message}</p>` : ""}
@@ -19,22 +19,21 @@ export function registerPage(container: HTMLElement, message?: string): void {
             <input name="password" type="password" placeholder="Пароль" required />
             <button type="submit">Зарегистрироваться</button>
           </form>
-        </article>
-        <article class="card">
-          <h2>Авторизация</h2>
-          <form id="login-form">
-            <input name="identifier" placeholder="Имя / email / логин / телефон" required />
-            <input name="password" type="password" placeholder="Пароль" required />
-            <button type="submit">Войти</button>
-          </form>
+          
+          <div class="auth-actions">
+            <button type="button" id="to-auth">Уже есть аккаунт? Перейти на авторизацию</button>
+            <button type="button" id="to-home">На главную</button>
+          </div>
         </article>
       </section>
     `
   );
 
   const registerForm = document.getElementById("register-form");
-  const loginForm = document.getElementById("login-form");
-  if (!(registerForm instanceof HTMLFormElement) || !(loginForm instanceof HTMLFormElement)) {
+  const toAuthBtn = document.getElementById("to-auth");
+  const toHomeBtn = document.getElementById("to-home");
+
+  if (!(registerForm instanceof HTMLFormElement)) {
     return;
   }
 
@@ -42,10 +41,18 @@ export function registerPage(container: HTMLElement, message?: string): void {
     event.preventDefault();
     void onRegister(registerForm, container);
   });
-  loginForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    void onLogin(loginForm, container);
-  });
+
+  if (toAuthBtn instanceof HTMLButtonElement) {
+    toAuthBtn.addEventListener("click", () => {
+      void navigate("/auth");
+    });
+  }
+
+  if (toHomeBtn instanceof HTMLButtonElement) {
+    toHomeBtn.addEventListener("click", () => {
+      void navigate("/");
+    });
+  }
 }
 
 async function onRegister(form: HTMLFormElement, container: HTMLElement): Promise<void> {
@@ -64,21 +71,5 @@ async function onRegister(form: HTMLFormElement, container: HTMLElement): Promis
     await navigate("/");
   } catch (error: unknown) {
     registerPage(container, error instanceof Error ? error.message : "Ошибка регистрации");
-  }
-}
-
-async function onLogin(form: HTMLFormElement, container: HTMLElement): Promise<void> {
-  const data = new FormData(form);
-  const payload: LoginPayload = {
-    identifier: String(data.get("identifier") ?? ""),
-    password: String(data.get("password") ?? "")
-  };
-
-  try {
-    const response = await api.login(payload);
-    state.user = response.user;
-    await navigate("/");
-  } catch (error: unknown) {
-    registerPage(container, error instanceof Error ? error.message : "Ошибка авторизации");
   }
 }

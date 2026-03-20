@@ -32,7 +32,6 @@ export const api = {
     }),
     me: () => request("/auth/me"),
     logout: () => request("/auth/logout", { method: "POST" }),
-    products: (category) => request(`/products${category === "all" ? "" : `?category=${encodeURIComponent(category)}`}`),
     basket: () => request("/basket/active"),
     addToBasket: (productId) => request("/basket/items", {
         method: "POST",

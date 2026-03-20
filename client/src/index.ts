@@ -1,7 +1,7 @@
 import { api } from "./api";
 import { basketPage } from "./pages/basket-page";
-import { deliveryPage } from "./pages/delivery-page";
 import { homePage } from "./pages/home-page";
+import { authPage } from "./pages/auth-page";
 import { registerPage } from "./pages/register-page";
 import { registerRoute, renderCurrentRoute } from "./router";
 import { state } from "./state";
@@ -13,9 +13,9 @@ if (!(app instanceof HTMLElement)) {
 }
 
 registerRoute("/", () => homePage(app));
+registerRoute("/auth", () => authPage(app));
 registerRoute("/register", () => registerPage(app));
 registerRoute("/basket", () => basketPage(app));
-registerRoute("/delivery", () => deliveryPage(app));
 registerRoute("/404", () => {
   app.innerHTML = `<div class="card"><h2>404</h2><p>Страница не найдена</p></div>`;
 });

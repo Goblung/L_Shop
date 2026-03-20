@@ -6,14 +6,6 @@ export interface User {
   login: string;
 }
 
-export interface Product {
-  id: string;
-  name: string;
-  price: number;
-  category: string;
-  inStock: boolean;
-}
-
 export interface BasketItem {
   productId: string;
   name: string;
