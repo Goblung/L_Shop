@@ -32,5 +32,15 @@
     "paymentMethod": "cash",
     "status": "active",
     "createdAt": "2026-03-20T20:50:42.834Z"
+  },
+  {
+    "id": "d-1774093524410",
+    "userId": "8d24f547-2ef6-48b9-909f-6cb3e145d776",
+    "address": "ул. Авиационная, 13, г. Минск, Беларусь",
+    "phone": "375333838579",
+    "email": "vlad.seva@example.com",
+    "paymentMethod": "card",
+    "status": "active",
+    "createdAt": "2026-03-21T11:45:24.410Z"
   }
 ]

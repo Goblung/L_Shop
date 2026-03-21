@@ -10,7 +10,13 @@ export async function homePage(container: HTMLElement): Promise<void> {
     container,
     `
       <section class="catalog-page" id="catalog-root">
-        <h2 class="catalog-title">Каталог компьютерных запчастей</h2>
+        <header class="catalog-hero">
+          <p class="catalog-hero-kicker">Каталог</p>
+          <h1 class="catalog-title">Компьютерные комплектующие</h1>
+          <p class="catalog-lead">
+            Процессоры, видеокарты, память, накопители и периферия — подберите детали под сборку и бюджет.
+          </p>
+        </header>
 
         <aside class="filters-panel" id="filters-panel" aria-label="Фильтры каталога">
           <div class="filters-panel-head">
@@ -150,7 +156,6 @@ export async function homePage(container: HTMLElement): Promise<void> {
       .join("");
   };
 
-  // Фильтры
   searchInput.addEventListener("input", () => {
     searchTerm = searchInput.value;
     renderProducts();
@@ -181,7 +186,6 @@ export async function homePage(container: HTMLElement): Promise<void> {
     renderProducts();
   });
 
-  // Добавление в корзину (делегирование событий)
   catalogRoot.addEventListener("click", async (event) => {
     const target = event.target;
     if (!(target instanceof HTMLElement)) return;
@@ -206,7 +210,6 @@ export async function homePage(container: HTMLElement): Promise<void> {
     window.dispatchEvent(new Event("basket:updated"));
   });
 
-  // Загрузка товаров
   try {
     products = await api.products();
 
