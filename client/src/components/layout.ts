@@ -15,7 +15,7 @@ async function syncBasketCount(): Promise<void> {
     const count = basket.items.reduce((sum, item) => sum + item.quantity, 0);
     basketBtn.textContent = `Корзина (${count})`;
   } catch {
-    // If basket endpoint fails - leave default text
+    return;
   }
 }
 
@@ -31,9 +31,18 @@ export function renderLayout(content: string): string {
   return `
     <header class="topbar">
       <div class="topbar-left">
-        <div class="brand">Shop</div>
+        <div class="brand" lang="en">L-Shop</div>
+        <span class="brand-tagline">Комплектующие</span>
         <nav class="menu">
           <a href="/" data-link>Главная</a>
+          ${
+            state.user
+              ? `
+            <a href="/basket" data-link class="nav-link-cart">Корзина</a>
+            <a href="/delivery" data-link>Доставка</a>
+          `
+              : ""
+          }
         </nav>
       </div>
       <div class="topbar-right">

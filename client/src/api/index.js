@@ -38,6 +38,14 @@ export const api = {
         method: "POST",
         body: JSON.stringify({ productId, quantity })
     }),
+    updateBasketItem: (productId, quantity) => request(`/basket/items/${encodeURIComponent(productId)}`, {
+        method: "PATCH",
+        body: JSON.stringify({ quantity })
+    }),
+    removeBasketItem: (productId) => request(`/basket/items/${encodeURIComponent(productId)}`, {
+        method: "DELETE"
+    }),
+    clearBasket: () => request("/basket/clear", { method: "DELETE" }),
     products: async () => {
         const rawProducts = await request("/products");
         return rawProducts.map((raw) => {

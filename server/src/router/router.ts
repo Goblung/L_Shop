@@ -18,6 +18,17 @@ router.get("/auth/me", authMiddleware, authController.me.bind(authController));
 
 router.get("/basket/active", authMiddleware, basketController.getActive.bind(basketController));
 router.post("/basket/items", authMiddleware, basketController.addItem.bind(basketController));
+router.patch(
+  "/basket/items/:productId",
+  authMiddleware,
+  basketController.updateItem.bind(basketController)
+);
+router.delete(
+  "/basket/items/:productId",
+  authMiddleware,
+  basketController.removeItem.bind(basketController)
+);
+router.delete("/basket/clear", authMiddleware, basketController.clear.bind(basketController));
 router.get("/delivery/active", authMiddleware, deliveryController.getActive.bind(deliveryController));
 router.post("/delivery", authMiddleware, deliveryController.create.bind(deliveryController));
 router.get("/products", productsController.list.bind(productsController));

@@ -9,23 +9,29 @@ export async function deliveryPage(container: HTMLElement, message = ""): Promis
     mountLayout(
       container,
       `
-        <section class="card">
+        <section class="card delivery-page">
           <h2>Оформление доставки</h2>
-          ${message ? `<p>${message}</p>` : ""}
+          ${
+            message
+              ? `<p class="delivery-intro" role="status">${message}</p>`
+              : basket.items.length > 0
+                ? `<p class="delivery-intro">Укажите контакты и адрес — подтвердим заказ и сроки доставки.</p>`
+                : ""
+          }
           ${
             basket.items.length === 0
-              ? "<p>Корзина пуста. Добавьте товары на главной.</p>"
+              ? "<p class=\"muted\">Корзина пуста. Добавьте товары в каталоге.</p>"
               : `
               <ul class="basket-list">
                 ${basket.items
                   .map(
                     (item) =>
-                      `<li><span data-title="basket">${item.name}</span> — <span data-price="basket">${item.price} BYN</span> x ${item.quantity}</li>`
+                      `<li><span data-title="basket">${item.name}</span> — <span data-price="basket">${item.price} BYN</span> × ${item.quantity}</li>`
                   )
                   .join("")}
               </ul>
-              <p><strong>Итого: ${total} BYN</strong></p>
-              <form id="delivery-form" data-delivery="main">
+              <p class="delivery-total">Итого: <strong>${total} BYN</strong></p>
+              <form id="delivery-form" class="delivery-form" data-delivery="main">
                 <input name="address" placeholder="Адрес доставки" data-delivery="address" required />
                 <input name="phone" placeholder="Телефон" data-delivery="phone" required />
                 <input name="email" type="email" placeholder="Email" data-delivery="email" required />
@@ -47,7 +53,7 @@ export async function deliveryPage(container: HTMLElement, message = ""): Promis
       });
     }
   } catch {
-    await navigate("/register");
+    await navigate("/auth");
   }
 }
 
@@ -63,6 +69,7 @@ async function submitDelivery(form: HTMLFormElement, container: HTMLElement): Pr
 
   try {
     await api.createDelivery(payload);
+    window.dispatchEvent(new Event("basket:updated"));
     await deliveryPage(container, "Доставка создана");
   } catch (error: unknown) {
     await deliveryPage(
