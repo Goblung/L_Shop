@@ -38,7 +38,7 @@ export async function deliveryPage(container, message = "") {
         }
     }
     catch {
-        await navigate("/register");
+        await navigate("/auth");
     }
 }
 async function submitDelivery(form, container) {
@@ -51,6 +51,7 @@ async function submitDelivery(form, container) {
     };
     try {
         await api.createDelivery(payload);
+        window.dispatchEvent(new Event("basket:updated"));
         await deliveryPage(container, "Доставка создана");
     }
     catch (error) {

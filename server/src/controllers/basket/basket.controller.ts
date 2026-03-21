@@ -46,4 +46,62 @@ export class BasketController {
     });
     res.status(201).json(basket);
   }
+
+  async updateItem(req: Request, res: Response): Promise<void> {
+    if (!req.userId) {
+      res.status(401).json({ error: "Не авторизован" });
+      return;
+    }
+
+    const productId = String(req.params.productId ?? "");
+    if (!productId) {
+      res.status(400).json({ error: "productId обязателен" });
+      return;
+    }
+
+    const { quantity } = req.body as { quantity?: number };
+    if (typeof quantity !== "number" || !Number.isFinite(quantity)) {
+      res.status(400).json({ error: "quantity должно быть числом" });
+      return;
+    }
+
+    const basket = await basketService.updateItemQuantity(req.userId, productId, quantity);
+    if (!basket) {
+      res.status(404).json({ error: "Позиция не найдена или неверное количество" });
+      return;
+    }
+
+    res.json(basket);
+  }
+
+  async removeItem(req: Request, res: Response): Promise<void> {
+    if (!req.userId) {
+      res.status(401).json({ error: "Не авторизован" });
+      return;
+    }
+
+    const productId = String(req.params.productId ?? "");
+    if (!productId) {
+      res.status(400).json({ error: "productId обязателен" });
+      return;
+    }
+
+    const basket = await basketService.removeItem(req.userId, productId);
+    if (!basket) {
+      res.status(404).json({ error: "Позиция не найдена" });
+      return;
+    }
+
+    res.json(basket);
+  }
+
+  async clear(req: Request, res: Response): Promise<void> {
+    if (!req.userId) {
+      res.status(401).json({ error: "Не авторизован" });
+      return;
+    }
+
+    const basket = await basketService.clear(req.userId);
+    res.json(basket);
+  }
 }
